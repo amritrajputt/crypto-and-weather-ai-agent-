@@ -1,8 +1,10 @@
 import dotenv from "dotenv";
+
+
 dotenv.config()
 
-async function getCryptoPrice({coin}) {
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=inr`;
+async function getCryptoPrice({coin,currency}) {
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=${currency}`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -14,5 +16,7 @@ async function getWeather({city}) {
     return data;
 }
 
-// console.log(await getCryptoPrice({coin: "bitcoin"}));
-// console.log(await getWeather({city: "lucknow"}));
+export const toolFunction = {
+    "getCryptoPrice" : getCryptoPrice,
+    "getWeather" : getWeather
+}
